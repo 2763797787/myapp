@@ -1,0 +1,2377 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <!-- PWA配置 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#1a6dcc">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="遗精自评">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <link rel="shortcut icon" href="icons/favicon.ico">
+    <!-- 原来的其他代码保持不变 -->
+    <meta charset="UTF-8">
+    <title>遗精风险自评表</title>
+    ...
+</head>
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>遗精风险自评表</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1a6dcc;
+            --primary-dark: #0d4d9c;
+            --success-color: #27ae60;
+            --danger-color: #e74c3c;
+            --warning-color: #f39c12;
+            --light-bg: #f5f7fa;
+            --card-bg: #ffffff;
+            --text-primary: #2c3e50;
+            --text-secondary: #7f8c8d;
+            --border-radius: 15px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 20px 15px;
+            max-width: 800px;
+            margin: 0 auto;
+            min-height: 100vh;
+            background-image: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        
+        .container {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            padding-bottom: 30px;
+            margin-bottom: 30px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+            border-radius: 0 0 25px 25px;
+            margin-bottom: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            z-index: 0;
+        }
+        
+        header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+            letter-spacing: 1px;
+        }
+        
+        header p {
+            font-size: 1rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+            max-width: 90%;
+            margin: 0 auto;
+        }
+        
+        .date-control {
+            background-color: #f0f7ff;
+            border-radius: 12px;
+            padding: 15px;
+            margin: 0 20px 25px;
+            text-align: center;
+            border: 2px dashed #c2d9ff;
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .date-display {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .date-picker-btn {
+            background-color: #4d8fe0;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .date-picker-btn:hover {
+            background-color: #3a7bc8;
+            transform: translateY(-2px);
+        }
+        
+        .data-controls {
+            display: flex;
+            gap: 10px;
+            margin: 0 20px 25px;
+        }
+        
+        .data-btn {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+        
+        .export-btn {
+            background-color: #e8f5e9;
+            color: var(--success-color);
+            border: 2px solid #c8e6c9;
+        }
+        
+        .export-btn:hover {
+            background-color: #d5edda;
+            transform: translateY(-2px);
+        }
+        
+        .import-btn {
+            background-color: #e3f2fd;
+            color: var(--primary-color);
+            border: 2px solid #bbdefb;
+        }
+        
+        .import-btn:hover {
+            background-color: #d1e7ff;
+            transform: translateY(-2px);
+        }
+        
+        .assessment-form {
+            padding: 0 20px;
+        }
+        
+        .question-item {
+            background-color: #f9fbfe;
+            border-radius: 15px;
+            padding: 18px 20px;
+            margin-bottom: 18px;
+            border-left: 5px solid #4d8fe0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .question-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.06);
+        }
+        
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.05rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        
+        .question-number {
+            display: inline-block;
+            background-color: #4d8fe0;
+            color: white;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 26px;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+        
+        .options {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        .option {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .option input {
+            display: none;
+        }
+        
+        .option label {
+            display: block;
+            padding: 12px 5px;
+            border-radius: 10px;
+            background-color: #e8f0fd;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+            border: 2px solid transparent;
+        }
+        
+        .option input:checked + label {
+            background-color: #4d8fe0;
+            color: white;
+            border-color: #3a7bc8;
+            box-shadow: 0 4px 8px rgba(77, 143, 224, 0.2);
+        }
+        
+        .option label:hover {
+            background-color: #d6e5ff;
+        }
+        
+        .submit-btn {
+            display: block;
+            width: 90%;
+            margin: 30px auto 0;
+            padding: 18px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 6px 15px rgba(26, 109, 204, 0.3);
+            letter-spacing: 1px;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(26, 109, 204, 0.4);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(1px);
+        }
+        
+        .result-panel {
+            background-color: #f9fbfe;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 20px 20px;
+            text-align: center;
+            display: none;
+            border-top: 6px solid #4d8fe0;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .result-panel h3 {
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .result-panel h3 i {
+            font-size: 1.6rem;
+        }
+        
+        .risk-high {
+            color: var(--danger-color);
+            font-weight: bold;
+            font-size: 1.3rem;
+            margin: 10px 0;
+            padding: 12px;
+            border-radius: 10px;
+            background-color: #ffeaea;
+            border: 2px solid #ffcccc;
+        }
+        
+        .risk-low {
+            color: var(--success-color);
+            font-weight: bold;
+            font-size: 1.3rem;
+            margin: 10px 0;
+            padding: 12px;
+            border-radius: 10px;
+            background-color: #eaffea;
+            border: 2px solid #ccffcc;
+        }
+        
+        .score-display {
+            font-size: 1.1rem;
+            margin: 15px 0;
+            color: var(--text-secondary);
+        }
+        
+        .history-section {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            padding: 25px 20px;
+        }
+        
+        .history-section h2 {
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f7ff;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .history-section h2 i {
+            color: #4d8fe0;
+        }
+        
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .selection-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            display: none;
+        }
+        
+        .selection-info {
+            font-size: 0.9rem;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        .delete-selected-btn {
+            background-color: #ffebee;
+            color: var(--danger-color);
+            border: 1px solid #ffcdd2;
+            border-radius: 8px;
+            padding: 6px 12px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .history-list-container {
+            position: relative;
+        }
+        
+        .history-list {
+            max-height: 300px;
+            overflow-y: auto;
+            padding-right: 10px;
+            position: relative;
+        }
+        
+        .history-item-wrapper {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 12px;
+            border-radius: 12px;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        
+        .history-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background-color: #f9fbfe;
+            border-radius: 12px;
+            border-left: 5px solid #4d8fe0;
+            transition: transform 0.3s, background-color 0.2s;
+            cursor: pointer;
+            position: relative;
+            z-index: 10;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: pan-y;
+        }
+        
+        .history-item.selected {
+            background-color: #e3f2fd;
+            border-left: 5px solid var(--primary-color);
+        }
+        
+        .history-item.sliding {
+            transition: transform 0.2s ease;
+        }
+        
+        .history-item-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .history-date {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .history-risk {
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .risk-high-badge {
+            background-color: #ffeaea;
+            color: var(--danger-color);
+            border: 1px solid #ffcccc;
+        }
+        
+        .risk-low-badge {
+            background-color: #eaffea;
+            color: var(--success-color);
+            border: 1px solid #ccffcc;
+        }
+        
+        .delete-btn {
+            position: absolute;
+            right: -80px;
+            top: 0;
+            height: 100%;
+            width: 80px;
+            background-color: var(--danger-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            cursor: pointer;
+            transition: right 0.3s;
+            border-radius: 0 12px 12px 0;
+            z-index: 5;
+        }
+        
+        .delete-btn i {
+            font-size: 1.2rem;
+        }
+        
+        .delete-btn.show {
+            right: 0;
+        }
+        
+        .selection-checkbox {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            border: 2px solid #ccc;
+            background-color: white;
+            margin-right: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.2s;
+        }
+        
+        .selection-checkbox.checked {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .selection-checkbox.checked::after {
+            content: "✓";
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .clear-history {
+            display: block;
+            width: 100%;
+            margin-top: 20px;
+            padding: 14px;
+            background-color: #f8f9fa;
+            color: #6c757d;
+            border: 2px dashed #dee2e6;
+            border-radius: 12px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .clear-history:hover {
+            background-color: #ffeaea;
+            color: var(--danger-color);
+            border-color: #ffcccc;
+        }
+        
+        .empty-history {
+            text-align: center;
+            padding: 30px 20px;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+        
+        .day-red {
+            color: var(--danger-color) !important;
+            font-weight: 700;
+            position: relative;
+        }
+        
+        .day-red::after {
+            content: "⚠";
+            margin-left: 5px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .modal h3 {
+            margin-bottom: 15px;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .modal p {
+            margin-bottom: 20px;
+            color: var(--text-secondary);
+        }
+        
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+        
+        .modal-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .modal-btn.confirm {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .modal-btn.confirm:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .modal-btn.cancel {
+            background-color: #f8f9fa;
+            color: var(--text-secondary);
+        }
+        
+        .modal-btn.cancel:hover {
+            background-color: #e9ecef;
+        }
+        
+        .detail-list {
+            margin: 20px 0;
+        }
+        
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            background-color: #f9fbfe;
+            border-radius: 10px;
+            border-left: 4px solid #4d8fe0;
+        }
+        
+        .detail-question {
+            font-weight: 500;
+            flex: 1;
+        }
+        
+        .detail-answer {
+            font-weight: 600;
+            padding: 5px 12px;
+            border-radius: 20px;
+            min-width: 60px;
+            text-align: center;
+        }
+        
+        .answer-yes {
+            background-color: #e8f5e9;
+            color: var(--success-color);
+        }
+        
+        .answer-no {
+            background-color: #ffebee;
+            color: var(--danger-color);
+        }
+        
+        .date-input {
+            background-color: white;
+            border: 2px solid #4d8fe0;
+            border-radius: 8px;
+            padding: 10px 15px;
+            font-size: 1rem;
+            color: var(--text-primary);
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .today-btn {
+            background-color: #e3f2fd;
+            color: var(--primary-color);
+            border: 2px solid #bbdefb;
+            border-radius: 8px;
+            padding: 8px 15px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-left: 10px;
+        }
+        
+        .today-btn:hover {
+            background-color: #d1e7ff;
+        }
+        
+        /* 日历样式 */
+        .calendar-section {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .calendar-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .calendar-nav {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .calendar-nav-btn {
+            background-color: #e3f2fd;
+            color: var(--primary-color);
+            border: none;
+            border-radius: 8px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .calendar-nav-btn:hover {
+            background-color: #d1e7ff;
+            transform: translateY(-2px);
+        }
+        
+        .calendar-weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            text-align: center;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .calendar-days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+        }
+        
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+            user-select: none;
+        }
+        
+        .calendar-day:hover {
+            background-color: #f0f7ff;
+        }
+        
+        .calendar-day.today {
+            background-color: #e3f2fd;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+        
+        .calendar-day.selected {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 700;
+        }
+        
+        .calendar-day.other-month {
+            color: #ccc;
+            cursor: default;
+        }
+        
+        .calendar-day.other-month:hover {
+            background-color: transparent;
+        }
+        
+        .day-dot {
+            position: absolute;
+            bottom: 4px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+        }
+        
+        .day-dot.high-risk {
+            background-color: var(--danger-color);
+        }
+        
+        .day-dot.low-risk {
+            background-color: var(--success-color);
+        }
+        
+        /* 月份分组样式 */
+        .month-group {
+            margin-bottom: 30px;
+        }
+        
+        .month-header {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f7ff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .month-header i {
+            color: #4d8fe0;
+        }
+        
+        .month-stats {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        
+        .stat-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .stat-dot.high-risk {
+            background-color: var(--danger-color);
+        }
+        
+        .stat-dot.low-risk {
+            background-color: var(--success-color);
+        }
+        
+        @media (max-width: 480px) {
+            .question-text {
+                font-size: 1rem;
+            }
+            
+            .options {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .option label {
+                padding: 15px 5px;
+            }
+            
+            .date-control {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .data-controls {
+                flex-direction: column;
+            }
+            
+            .modal-content {
+                padding: 20px;
+                width: 95%;
+            }
+            
+            .today-btn {
+                margin-left: 0;
+                margin-top: 10px;
+                width: 100%;
+            }
+            
+            .selection-controls {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            
+            .calendar-days {
+                gap: 4px;
+            }
+            
+            .calendar-day {
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* 动画效果 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 0.5s ease-in-out;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .slide-in {
+            animation: slideIn 0.4s ease-out;
+        }
+        
+        @keyframes slideOut {
+            from { opacity: 1; transform: translateX(0); }
+            to { opacity: 0; transform: translateX(-100%); }
+        }
+        
+        .slide-out {
+            animation: slideOut 0.3s ease-out forwards;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>遗精风险自评表</h1>
+            <p>每天睡前花1分钟打分，评估今夜遗精风险</p>
+        </header>
+        
+        <div class="date-control">
+            <div class="date-display">
+                <i class="fas fa-calendar-alt"></i>
+                <span id="current-date">正在加载日期...</span>
+            </div>
+            <div>
+                <button id="datePickerBtn" class="date-picker-btn">
+                    <i class="fas fa-calendar-day"></i>
+                    <span>选择日期</span>
+                </button>
+                <button id="todayBtn" class="today-btn">
+                    <i class="fas fa-home"></i>
+                    今天
+                </button>
+            </div>
+        </div>
+        
+        <input type="date" id="dateInput" class="date-input" style="display: none;">
+        
+        <div class="data-controls">
+            <button id="exportBtn" class="data-btn export-btn">
+                <i class="fas fa-download"></i>
+                <span>导出数据</span>
+            </button>
+            <button id="importBtn" class="data-btn import-btn">
+                <i class="fas fa-upload"></i>
+                <span>导入数据</span>
+            </button>
+        </div>
+        
+        <input type="file" id="importFile" accept=".json" style="display: none;">
+        
+        <form id="assessmentForm" class="assessment-form">
+            <div class="question-item fade-in">
+                <div class="question-text">
+                    <span class="question-number">1</span>
+                    <span>今日饮食合规？(避免辛辣刺激、过度进补)</span>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q1-yes" name="q1" value="yes">
+                        <label for="q1-yes">是</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q1-no" name="q1" value="no">
+                        <label for="q1-no">否</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item fade-in" style="animation-delay: 0.1s">
+                <div class="question-text">
+                    <span class="question-number">2</span>
+                    <span>今日练功完成？(如固肾功、八段锦等)</span>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q2-yes" name="q2" value="yes">
+                        <label for="q2-yes">是</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q2-no" name="q2" value="no">
+                        <label for="q2-no">否</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item fade-in" style="animation-delay: 0.2s">
+                <div class="question-text">
+                    <span class="question-number">3</span>
+                    <span>今日23点前睡？(保证充足睡眠，避免熬夜)</span>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q3-yes" name="q3" value="yes">
+                        <label for="q3-yes">是</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q3-no" name="q3" value="no">
+                        <label for="q3-no">否</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item fade-in" style="animation-delay: 0.3s">
+                <div class="question-text">
+                    <span class="question-number">4</span>
+                    <span>今日有无重大执念/焦虑？(避免过度思虑)</span>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q4-yes" name="q4" value="no">
+                        <label for="q4-yes">有</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q4-no" name="q4" value="yes">
+                        <label for="q4-no">无</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item fade-in" style="animation-delay: 0.4s">
+                <div class="question-text">
+                    <span class="question-number">5</span>
+                    <span>今日放松方式是否健康？(如冥想、阅读、散步等)</span>
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q5-yes" name="q5" value="yes">
+                        <label for="q5-yes">是</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q5-no" name="q5" value="no">
+                        <label for="q5-no">否</label>
+                    </div>
+                </div>
+            </div>
+            
+            <button type="submit" class="submit-btn">
+                <i class="fas fa-calculator"></i> 计算今夜风险
+            </button>
+        </form>
+        
+        <div id="resultPanel" class="result-panel">
+            <h3><i class="fas fa-chart-line"></i> 风险评估结果</h3>
+            <div id="riskLevel" class="risk-high">今夜为「高危夜」</div>
+            <div id="scoreDisplay" class="score-display">今日得分：2/5 (2个及以上"否"为高危)</div>
+            <p id="adviceText">建议：注意调整生活习惯，避免高危因素，可适当增加固肾功练习。</p>
+        </div>
+    </div>
+    
+    <!-- 新增日历部分 -->
+    <div class="calendar-section">
+        <div class="calendar-header">
+            <div class="calendar-title" id="calendarTitle">2025年12月</div>
+            <div class="calendar-nav">
+                <button id="prevMonthBtn" class="calendar-nav-btn">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button id="todayMonthBtn" class="calendar-nav-btn">
+                    今天
+                </button>
+                <button id="nextMonthBtn" class="calendar-nav-btn">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div class="calendar-weekdays">
+            <div>日</div>
+            <div>一</div>
+            <div>二</div>
+            <div>三</div>
+            <div>四</div>
+            <div>五</div>
+            <div>六</div>
+        </div>
+        
+        <div id="calendarDays" class="calendar-days">
+            <!-- 日历日期将通过JS动态生成 -->
+        </div>
+    </div>
+    
+    <div class="history-section">
+        <div class="history-header">
+            <h2><i class="fas fa-history"></i> 历史记录</h2>
+            <div class="selection-controls" id="selectionControls">
+                <div class="selection-info" id="selectionInfo">已选择0项</div>
+                <button id="deleteSelectedBtn" class="delete-selected-btn">
+                    <i class="fas fa-trash-alt"></i> 删除选中
+                </button>
+            </div>
+        </div>
+        
+        <!-- 月份分组的历史记录容器 -->
+        <div id="monthlyHistory">
+            <!-- 月份分组将通过JS动态生成 -->
+            <div class="empty-history">暂无历史记录，完成今日评估后将会显示历史数据</div>
+        </div>
+        
+        <button id="clearHistoryBtn" class="clear-history">
+            <i class="fas fa-trash-alt"></i> 清除所有历史记录
+        </button>
+    </div>
+    
+    <footer>
+        <p>说明：每天睡前评估，有2个及以上"否"，则今夜为"高危夜"，当天日期会标红提醒</p>
+        <p>数据存储在您的手机本地，不会上传到服务器</p>
+    </footer>
+    
+    <!-- 确认清除对话框 -->
+    <div id="confirmModal" class="modal">
+        <div class="modal-content slide-in">
+            <h3><i class="fas fa-exclamation-triangle"></i> 确认操作</h3>
+            <p id="modalMessage">您确定要清除所有历史记录吗？此操作不可撤销。</p>
+            <div class="modal-buttons">
+                <button id="confirmCancel" class="modal-btn cancel">取消</button>
+                <button id="confirmOk" class="modal-btn confirm">确定</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 详情查看对话框 -->
+    <div id="detailModal" class="modal">
+        <div class="modal-content slide-in">
+            <h3><i class="fas fa-info-circle"></i> 评估详情</h3>
+            <p id="detailDate">日期：2025年12月14日</p>
+            <div id="detailRisk" class="risk-high">高危夜</div>
+            <div id="detailScore" class="score-display">得分：2/5 (2个"否")</div>
+            
+            <div class="detail-list">
+                <div id="detailItem1" class="detail-item">
+                    <div class="detail-question">1. 今日饮食合规？</div>
+                    <div class="detail-answer answer-yes">是</div>
+                </div>
+                <div id="detailItem2" class="detail-item">
+                    <div class="detail-question">2. 今日练功完成？</div>
+                    <div class="detail-answer answer-yes">是</div>
+                </div>
+                <div id="detailItem3" class="detail-item">
+                    <div class="detail-question">3. 今日23点前睡？</div>
+                    <div class="detail-answer answer-no">否</div>
+                </div>
+                <div id="detailItem4" class="detail-item">
+                    <div class="detail-question">4. 今日有无重大执念/焦虑？</div>
+                    <div class="detail-answer answer-no">有</div>
+                </div>
+                <div id="detailItem5" class="detail-item">
+                    <div class="detail-question">5. 今日放松方式是否健康？</div>
+                    <div class="detail-answer answer-yes">是</div>
+                </div>
+            </div>
+            
+            <div class="modal-buttons">
+                <button id="closeDetailBtn" class="modal-btn confirm">关闭</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 获取DOM元素
+        const currentDateEl = document.getElementById('current-date');
+        const assessmentForm = document.getElementById('assessmentForm');
+        const resultPanel = document.getElementById('resultPanel');
+        const riskLevelEl = document.getElementById('riskLevel');
+        const scoreDisplayEl = document.getElementById('scoreDisplay');
+        const adviceTextEl = document.getElementById('adviceText');
+        const monthlyHistoryEl = document.getElementById('monthlyHistory');
+        const clearHistoryBtn = document.getElementById('clearHistoryBtn');
+        const exportBtn = document.getElementById('exportBtn');
+        const importBtn = document.getElementById('importBtn');
+        const importFileInput = document.getElementById('importFile');
+        const datePickerBtn = document.getElementById('datePickerBtn');
+        const todayBtn = document.getElementById('todayBtn');
+        const dateInput = document.getElementById('dateInput');
+        const confirmModal = document.getElementById('confirmModal');
+        const modalMessage = document.getElementById('modalMessage');
+        const confirmOkBtn = document.getElementById('confirmOk');
+        const confirmCancelBtn = document.getElementById('confirmCancel');
+        const detailModal = document.getElementById('detailModal');
+        const detailDateEl = document.getElementById('detailDate');
+        const detailRiskEl = document.getElementById('detailRisk');
+        const detailScoreEl = document.getElementById('detailScore');
+        const closeDetailBtn = document.getElementById('closeDetailBtn');
+        const selectionControls = document.getElementById('selectionControls');
+        const selectionInfo = document.getElementById('selectionInfo');
+        const deleteSelectedBtn = document.getElementById('deleteSelectedBtn');
+        
+        // 日历相关DOM元素
+        const calendarTitle = document.getElementById('calendarTitle');
+        const calendarDays = document.getElementById('calendarDays');
+        const prevMonthBtn = document.getElementById('prevMonthBtn');
+        const nextMonthBtn = document.getElementById('nextMonthBtn');
+        const todayMonthBtn = document.getElementById('todayMonthBtn');
+        
+        // 问题标签数组
+        const questionLabels = [
+            "今日饮食合规？(避免辛辣刺激、过度进补)",
+            "今日练功完成？(如固肾功、八段锦等)",
+            "今日23点前睡？(保证充足睡眠，避免熬夜)",
+            "今日有无重大执念/焦虑？(避免过度思虑)",
+            "今日放松方式是否健康？(如冥想、阅读、散步等)"
+        ];
+        
+        // 当前选择的日期
+        let currentSelectedDate = new Date();
+        
+        // 日历当前显示的月份
+        let calendarCurrentMonth = new Date().getMonth();
+        let calendarCurrentYear = new Date().getFullYear();
+        
+        // 待确认的操作类型
+        let pendingAction = null;
+        
+        // 滑动删除相关变量
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let currentSlideItem = null;
+        let isSwiping = false;
+        let swipeThreshold = 50; // 滑动阈值（像素）
+        
+        // 多选相关变量
+        let isSelectionMode = false;
+        let selectedDates = new Set();
+        let longPressTimer = null;
+        const LONG_PRESS_DURATION = 500; // 长按500毫秒进入多选模式
+        
+        // 初始化日期显示
+        function updateCurrentDate() {
+            const options = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
+            currentDateEl.textContent = currentSelectedDate.toLocaleDateString('zh-CN', options);
+            
+            // 检查是否已经是高危日
+            const dateStr = formatDate(currentSelectedDate);
+            const history = getHistory();
+            if (history[dateStr] && history[dateStr].highRisk) {
+                currentDateEl.classList.add('day-red');
+            } else {
+                currentDateEl.classList.remove('day-red');
+            }
+            
+            // 更新日期输入框的值
+            dateInput.value = formatDate(currentSelectedDate);
+        }
+        
+        // 格式化日期为 YYYY-MM-DD
+        function formatDate(date) {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+        
+        // 从localStorage获取历史记录
+        function getHistory() {
+            const historyJSON = localStorage.getItem('ejRiskAssessmentHistory');
+            return historyJSON ? JSON.parse(historyJSON) : {};
+        }
+        
+        // 保存历史记录到localStorage
+        function saveHistory(history) {
+            localStorage.setItem('ejRiskAssessmentHistory', JSON.stringify(history));
+        }
+        
+        // 生成日历
+        function generateCalendar(month = calendarCurrentMonth, year = calendarCurrentYear) {
+            // 更新日历标题
+            const monthNames = ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'];
+            calendarTitle.textContent = `${year}年${monthNames[month]}`;
+            
+            // 获取历史记录
+            const history = getHistory();
+            
+            // 获取当月第一天
+            const firstDay = new Date(year, month, 1);
+            // 获取当月最后一天
+            const lastDay = new Date(year, month + 1, 0);
+            // 获取当月天数
+            const daysInMonth = lastDay.getDate();
+            // 获取当月第一天是星期几（0-星期日，6-星期六）
+            const firstDayIndex = firstDay.getDay();
+            
+            // 清空日历
+            calendarDays.innerHTML = '';
+            
+            // 添加上个月的最后几天
+            const prevMonthLastDay = new Date(year, month, 0).getDate();
+            for (let i = firstDayIndex; i > 0; i--) {
+                const day = prevMonthLastDay - i + 1;
+                const date = new Date(year, month - 1, day);
+                const dateStr = formatDate(date);
+                const historyItem = history[dateStr];
+                
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day other-month';
+                dayElement.textContent = day;
+                dayElement.setAttribute('data-date', dateStr);
+                
+                // 添加评估状态小圆点
+                if (historyItem) {
+                    const dot = document.createElement('div');
+                    dot.className = `day-dot ${historyItem.highRisk ? 'high-risk' : 'low-risk'}`;
+                    dayElement.appendChild(dot);
+                }
+                
+                calendarDays.appendChild(dayElement);
+            }
+            
+            // 添加当月天数
+            const today = new Date();
+            const todayStr = formatDate(today);
+            const selectedDateStr = formatDate(currentSelectedDate);
+            
+            for (let i = 1; i <= daysInMonth; i++) {
+                const date = new Date(year, month, i);
+                const dateStr = formatDate(date);
+                const historyItem = history[dateStr];
+                
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day';
+                dayElement.textContent = i;
+                dayElement.setAttribute('data-date', dateStr);
+                
+                // 如果是今天
+                if (dateStr === todayStr) {
+                    dayElement.classList.add('today');
+                }
+                
+                // 如果是当前选中的日期
+                if (dateStr === selectedDateStr) {
+                    dayElement.classList.add('selected');
+                }
+                
+                // 添加评估状态小圆点
+                if (historyItem) {
+                    const dot = document.createElement('div');
+                    dot.className = `day-dot ${historyItem.highRisk ? 'high-risk' : 'low-risk'}`;
+                    dayElement.appendChild(dot);
+                }
+                
+                // 添加点击事件
+                dayElement.addEventListener('click', function() {
+                    const clickedDateStr = this.getAttribute('data-date');
+                    const clickedDate = new Date(clickedDateStr);
+                    
+                    currentSelectedDate = clickedDate;
+                    updateCurrentDate();
+                    loadDateRecord(currentSelectedDate);
+                    
+                    // 重新生成日历以更新选中状态
+                    generateCalendar(month, year);
+                });
+                
+                calendarDays.appendChild(dayElement);
+            }
+            
+            // 添加下个月的前几天
+            const totalCells = 42; // 6行x7列
+            const cellsUsed = firstDayIndex + daysInMonth;
+            const nextMonthDays = totalCells - cellsUsed;
+            
+            for (let i = 1; i <= nextMonthDays; i++) {
+                const date = new Date(year, month + 1, i);
+                const dateStr = formatDate(date);
+                const historyItem = history[dateStr];
+                
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day other-month';
+                dayElement.textContent = i;
+                dayElement.setAttribute('data-date', dateStr);
+                
+                // 添加评估状态小圆点
+                if (historyItem) {
+                    const dot = document.createElement('div');
+                    dot.className = `day-dot ${historyItem.highRisk ? 'high-risk' : 'low-risk'}`;
+                    dayElement.appendChild(dot);
+                }
+                
+                calendarDays.appendChild(dayElement);
+            }
+        }
+        
+        // 按月分组显示历史记录
+        function updateMonthlyHistoryDisplay() {
+            const history = getHistory();
+            const historyEntries = Object.entries(history);
+            
+            if (historyEntries.length === 0) {
+                monthlyHistoryEl.innerHTML = '<div class="empty-history">暂无历史记录，完成今日评估后将会显示历史数据</div>';
+                exitSelectionMode();
+                return;
+            }
+            
+            // 按日期排序（最新的在前面）
+            historyEntries.sort((a, b) => b[0].localeCompare(a[0]));
+            
+            // 按月分组
+            const monthlyGroups = {};
+            historyEntries.forEach(([date, data]) => {
+                const dateObj = new Date(date);
+                const year = dateObj.getFullYear();
+                const month = dateObj.getMonth() + 1; // 月份从1开始
+                const monthKey = `${year}-${month.toString().padStart(2, '0')}`;
+                
+                if (!monthlyGroups[monthKey]) {
+                    monthlyGroups[monthKey] = {
+                        year: year,
+                        month: month,
+                        records: []
+                    };
+                }
+                
+                monthlyGroups[monthKey].records.push({ date, data });
+            });
+            
+            // 生成HTML
+            let historyHTML = '';
+            
+            // 月份名称数组
+            const monthNames = ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'];
+            
+            // 按月循环生成内容
+            Object.keys(monthlyGroups).sort().reverse().forEach(monthKey => {
+                const group = monthlyGroups[monthKey];
+                const monthName = monthNames[group.month - 1];
+                
+                // 统计当月数据
+                let highRiskCount = 0;
+                let lowRiskCount = 0;
+                let totalScore = 0;
+                
+                group.records.forEach(record => {
+                    if (record.data.highRisk) {
+                        highRiskCount++;
+                    } else {
+                        lowRiskCount++;
+                    }
+                    totalScore += record.data.score;
+                });
+                
+                const avgScore = totalScore / group.records.length;
+                
+                historyHTML += `
+                    <div class="month-group">
+                        <div class="month-header">
+                            <i class="fas fa-calendar-alt"></i>
+                            ${group.year}年${monthName}
+                        </div>
+                        
+                        <div class="month-stats">
+                            <div class="stat-item">
+                                <div class="stat-dot high-risk"></div>
+                                <span>高危夜：${highRiskCount}天</span>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-dot low-risk"></div>
+                                <span>低危夜：${lowRiskCount}天</span>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-star" style="color: #f39c12;"></i>
+                                <span>平均分：${avgScore.toFixed(1)}/5</span>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-chart-line" style="color: #1a6dcc;"></i>
+                                <span>评估天数：${group.records.length}天</span>
+                            </div>
+                        </div>
+                        
+                        <div class="history-list-container">
+                            <div class="history-list">
+                `;
+                
+                // 添加当月每天的记录
+                group.records.forEach(record => {
+                    const { date, data } = record;
+                    const dateObj = new Date(date);
+                    const formattedDate = dateObj.toLocaleDateString('zh-CN', { month: 'short', day: 'numeric' });
+                    const dayOfWeek = dateObj.toLocaleDateString('zh-CN', { weekday: 'short' });
+                    const isHighRisk = data.highRisk;
+                    const isSelected = selectedDates.has(date);
+                    
+                    historyHTML += `
+                        <div class="history-item-wrapper" data-date="${date}">
+                            <div class="history-item ${isSelected ? 'selected' : ''}">
+                                <div class="history-item-content">
+                                    ${isSelectionMode ? `
+                                        <div class="selection-checkbox ${isSelected ? 'checked' : ''}"></div>
+                                    ` : ''}
+                                    <div class="history-date ${isHighRisk ? 'day-red' : ''}">
+                                        ${formattedDate} (${dayOfWeek})
+                                    </div>
+                                    <div class="history-risk ${isHighRisk ? 'risk-high-badge' : 'risk-low-badge'}">
+                                        ${isHighRisk ? '高危夜' : '低危夜'}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="delete-btn" data-date="${date}">
+                                <i class="fas fa-trash"></i>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                historyHTML += `
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            monthlyHistoryEl.innerHTML = historyHTML;
+            
+            // 为历史记录项添加事件监听
+            document.querySelectorAll('.history-item-wrapper').forEach(wrapper => {
+                const item = wrapper.querySelector('.history-item');
+                const date = wrapper.getAttribute('data-date');
+                const deleteBtn = wrapper.querySelector('.delete-btn');
+                
+                // 点击事件
+                item.addEventListener('click', function(e) {
+                    if (isSelectionMode) {
+                        // 在选择模式下，点击切换选择状态
+                        toggleSelectDate(date);
+                        e.stopPropagation();
+                    } else {
+                        // 在普通模式下，点击查看详情
+                        showDetail(date);
+                    }
+                });
+                
+                // 触摸开始事件（用于滑动删除和长按）
+                item.addEventListener('touchstart', function(e) {
+                    if (isSelectionMode) return; // 选择模式下禁用滑动
+                    
+                    touchStartX = e.touches[0].clientX;
+                    touchStartY = e.touches[0].clientY;
+                    currentSlideItem = wrapper;
+                    isSwiping = false;
+                    
+                    // 开始长按计时
+                    longPressTimer = setTimeout(() => {
+                        // 长按进入多选模式
+                        if (!isSelectionMode) {
+                            enterSelectionMode();
+                            toggleSelectDate(date);
+                        }
+                    }, LONG_PRESS_DURATION);
+                }, { passive: true });
+                
+                // 触摸移动事件
+                item.addEventListener('touchmove', function(e) {
+                    if (isSelectionMode) return; // 选择模式下禁用滑动
+                    
+                    // 清除长按计时器
+                    if (longPressTimer) {
+                        clearTimeout(longPressTimer);
+                        longPressTimer = null;
+                    }
+                    
+                    if (!currentSlideItem || currentSlideItem !== wrapper) return;
+                    
+                    const touchX = e.touches[0].clientX;
+                    const touchY = e.touches[0].clientY;
+                    
+                    const deltaX = touchStartX - touchX;
+                    const deltaY = Math.abs(touchStartY - touchY);
+                    
+                    // 如果水平移动超过垂直移动，认为是滑动
+                    if (Math.abs(deltaX) > deltaY && Math.abs(deltaX) > 5) {
+                        isSwiping = true;
+                        e.preventDefault();
+                        
+                        // 计算滑动距离，限制在0到80px之间
+                        let translateX = Math.min(Math.max(-deltaX, -80), 0);
+                        
+                        // 应用滑动效果
+                        item.style.transform = `translateX(${translateX}px)`;
+                        
+                        // 显示/隐藏删除按钮
+                        if (deltaX > swipeThreshold) {
+                            deleteBtn.classList.add('show');
+                        } else if (deltaX < -swipeThreshold) {
+                            deleteBtn.classList.remove('show');
+                        }
+                    }
+                }, { passive: false });
+                
+                // 触摸结束事件
+                item.addEventListener('touchend', function() {
+                    if (isSelectionMode) return; // 选择模式下禁用滑动
+                    
+                    // 清除长按计时器
+                    if (longPressTimer) {
+                        clearTimeout(longPressTimer);
+                        longPressTimer = null;
+                    }
+                    
+                    if (!currentSlideItem || currentSlideItem !== wrapper) return;
+                    
+                    // 添加滑动结束动画
+                    item.classList.add('sliding');
+                    
+                    // 根据滑动距离决定最终状态
+                    const touchEndX = event.changedTouches[0].clientX;
+                    const deltaX = touchStartX - touchEndX;
+                    
+                    if (isSwiping) {
+                        if (deltaX > swipeThreshold) {
+                            // 左滑超过阈值，显示删除按钮
+                            item.style.transform = 'translateX(-80px)';
+                            deleteBtn.classList.add('show');
+                        } else {
+                            // 未达到阈值，恢复原状
+                            item.style.transform = 'translateX(0)';
+                            deleteBtn.classList.remove('show');
+                        }
+                        
+                        // 动画结束后移除滑动类
+                        setTimeout(() => {
+                            item.classList.remove('sliding');
+                        }, 200);
+                    }
+                    
+                    // 重置状态
+                    isSwiping = false;
+                    currentSlideItem = null;
+                });
+                
+                // 点击其他地方关闭已打开的删除按钮
+                document.addEventListener('click', function(e) {
+                    if (!wrapper.contains(e.target) && !deleteBtn.contains(e.target)) {
+                        item.style.transform = 'translateX(0)';
+                        deleteBtn.classList.remove('show');
+                    }
+                });
+                
+                // 点击删除按钮
+                deleteBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    deleteSingleRecord(date);
+                });
+            });
+            
+            // 更新选择信息
+            updateSelectionInfo();
+        }
+        
+        // 切换选择日期
+        function toggleSelectDate(date) {
+            if (selectedDates.has(date)) {
+                selectedDates.delete(date);
+            } else {
+                selectedDates.add(date);
+            }
+            
+            // 更新显示
+            updateMonthlyHistoryDisplay();
+            
+            // 如果没有选中任何项目，退出选择模式
+            if (selectedDates.size === 0) {
+                exitSelectionMode();
+            }
+        }
+        
+        // 进入多选模式
+        function enterSelectionMode() {
+            isSelectionMode = true;
+            selectionControls.style.display = 'flex';
+            updateMonthlyHistoryDisplay();
+        }
+        
+        // 退出多选模式
+        function exitSelectionMode() {
+            isSelectionMode = false;
+            selectedDates.clear();
+            selectionControls.style.display = 'none';
+            updateMonthlyHistoryDisplay();
+        }
+        
+        // 更新选择信息
+        function updateSelectionInfo() {
+            selectionInfo.textContent = `已选择${selectedDates.size}项`;
+        }
+        
+        // 删除选中的记录
+        function deleteSelectedRecords() {
+            if (selectedDates.size === 0) {
+                showMessage('请先选择要删除的记录', 'warning');
+                return;
+            }
+            
+            modalMessage.textContent = `确定要删除选中的${selectedDates.size}条记录吗？此操作不可撤销。`;
+            showModal('deleteSelected');
+        }
+        
+        // 执行删除选中的记录
+        function performDeleteSelected() {
+            const history = getHistory();
+            
+            selectedDates.forEach(date => {
+                delete history[date];
+            });
+            
+            saveHistory(history);
+            exitSelectionMode();
+            updateMonthlyHistoryDisplay();
+            generateCalendar(); // 更新日历显示
+            
+            // 检查当前选择的日期是否被删除
+            const currentDateStr = formatDate(currentSelectedDate);
+            if (selectedDates.has(currentDateStr)) {
+                assessmentForm.reset();
+                resultPanel.style.display = 'none';
+                updateCurrentDate();
+            }
+            
+            showMessage(`成功删除${selectedDates.size}条记录`, 'success');
+        }
+        
+        // 删除单条记录
+        function deleteSingleRecord(date) {
+            // 显示确认对话框
+            const dateObj = new Date(date);
+            const formattedDate = dateObj.toLocaleDateString('zh-CN', { month: 'short', day: 'numeric', weekday: 'short' });
+            modalMessage.textContent = `确定要删除${formattedDate}的记录吗？此操作不可撤销。`;
+            
+            pendingAction = { type: 'deleteSingle', data: date };
+            confirmModal.style.display = 'flex';
+        }
+        
+        // 执行删除单条记录
+        function performDeleteSingle(date) {
+            const history = getHistory();
+            delete history[date];
+            saveHistory(history);
+            updateMonthlyHistoryDisplay();
+            generateCalendar(); // 更新日历显示
+            
+            // 检查当前选择的日期是否被删除
+            const currentDateStr = formatDate(currentSelectedDate);
+            if (date === currentDateStr) {
+                assessmentForm.reset();
+                resultPanel.style.display = 'none';
+                updateCurrentDate();
+            }
+            
+            showMessage('记录已删除', 'success');
+        }
+        
+        // 计算风险评估
+        function calculateRisk() {
+            const formData = new FormData(assessmentForm);
+            let noCount = 0;
+            let answers = [];
+            
+            // 检查每个问题的答案
+            for (let i = 1; i <= 5; i++) {
+                const answer = formData.get(`q${i}`);
+                if (answer === 'no') {
+                    noCount++;
+                    answers.push(false);
+                } else if (answer === 'yes') {
+                    answers.push(true);
+                } else {
+                    // 如果某个问题没有回答，默认为是
+                    answers.push(true);
+                }
+            }
+            
+            // 计算分数（每个"是"得1分）
+            const score = answers.filter(answer => answer === true).length;
+            const highRisk = noCount >= 2;
+            
+            return { noCount, score, highRisk, answers };
+        }
+        
+        // 显示评估结果
+        function showResult(result, dateStr = null) {
+            const { noCount, score, highRisk } = result;
+            const dateToUse = dateStr || formatDate(currentSelectedDate);
+            
+            // 更新结果面板内容
+            scoreDisplayEl.textContent = `得分：${score}/5 (${noCount}个"否")`;
+            
+            // 判断是否为今天
+            const todayStr = formatDate(new Date());
+            const isToday = dateToUse === todayStr;
+            
+            if (highRisk) {
+                riskLevelEl.textContent = isToday ? '今夜为「高危夜」' : '该夜为「高危夜」';
+                riskLevelEl.className = 'risk-high';
+                adviceTextEl.textContent = '建议：遗精风险较高，请注意调整生活习惯，避免高危因素，睡前可做放松练习。';
+                
+                // 将当前日期标记为红色
+                currentDateEl.classList.add('day-red');
+            } else {
+                riskLevelEl.textContent = isToday ? '今夜为「低危夜」' : '该夜为「低危夜」';
+                riskLevelEl.className = 'risk-low';
+                adviceTextEl.textContent = '恭喜！遗精风险较低，请继续保持良好的生活习惯。';
+                
+                // 移除当前日期的红色标记
+                currentDateEl.classList.remove('day-red');
+            }
+            
+            // 显示结果面板并添加动画
+            resultPanel.style.display = 'block';
+            resultPanel.classList.remove('pulse');
+            void resultPanel.offsetWidth; // 触发重排以重新启动动画
+            resultPanel.classList.add('pulse');
+            
+            // 保存评估结果
+            saveAssessmentResult(result, dateToUse);
+            
+            // 更新历史记录和日历显示
+            updateMonthlyHistoryDisplay();
+            generateCalendar();
+        }
+        
+        // 保存评估结果到历史记录
+        function saveAssessmentResult(result, dateStr) {
+            const history = getHistory();
+            
+            history[dateStr] = {
+                date: dateStr,
+                noCount: result.noCount,
+                score: result.score,
+                highRisk: result.highRisk,
+                answers: result.answers,
+                timestamp: currentSelectedDate.getTime()
+            };
+            
+            saveHistory(history);
+        }
+        
+        // 加载指定日期的评估记录
+        function loadDateRecord(date) {
+            const dateStr = formatDate(date);
+            const history = getHistory();
+            
+            // 重置表单
+            assessmentForm.reset();
+            
+            if (history[dateStr]) {
+                // 如果有记录，加载记录
+                const record = history[dateStr];
+                
+                // 设置之前的选择
+                const answers = record.answers;
+                for (let i = 0; i < answers.length; i++) {
+                    const questionNum = i + 1;
+                    const value = answers[i] ? 'yes' : 'no';
+                    const radioInput = document.querySelector(`input[name="q${questionNum}"][value="${value}"]`);
+                    if (radioInput) {
+                        radioInput.checked = true;
+                    }
+                }
+                
+                // 显示结果
+                showResult(record, dateStr);
+            } else {
+                // 如果没有记录，隐藏结果面板
+                resultPanel.style.display = 'none';
+                
+                // 更新日期显示
+                updateCurrentDate();
+                
+                // 根据是否今天来更新按钮文字
+                const todayStr = formatDate(new Date());
+                if (dateStr === todayStr) {
+                    document.querySelector('.submit-btn i').className = 'fas fa-calculator';
+                    document.querySelector('.submit-btn').innerHTML = '<i class="fas fa-calculator"></i> 计算今夜风险';
+                } else {
+                    document.querySelector('.submit-btn i').className = 'fas fa-save';
+                    document.querySelector('.submit-btn').innerHTML = '<i class="fas fa-save"></i> 保存评估结果';
+                }
+            }
+        }
+        
+        // 显示详情
+        function showDetail(dateStr) {
+            const history = getHistory();
+            const record = history[dateStr];
+            
+            if (!record) return;
+            
+            const dateObj = new Date(dateStr);
+            const formattedDate = dateObj.toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' });
+            
+            detailDateEl.textContent = `日期：${formattedDate}`;
+            detailScoreEl.textContent = `得分：${record.score}/5 (${record.noCount}个"否")`;
+            
+            if (record.highRisk) {
+                detailRiskEl.textContent = '高危夜';
+                detailRiskEl.className = 'risk-high';
+            } else {
+                detailRiskEl.textContent = '低危夜';
+                detailRiskEl.className = 'risk-low';
+            }
+            
+            // 更新详情项
+            for (let i = 0; i < record.answers.length; i++) {
+                const detailItem = document.getElementById(`detailItem${i+1}`);
+                const answerEl = detailItem.querySelector('.detail-answer');
+                const questionEl = detailItem.querySelector('.detail-question');
+                
+                questionEl.textContent = `${i+1}. ${questionLabels[i]}`;
+                
+                if (record.answers[i]) {
+                    answerEl.textContent = i === 3 ? '无' : '是';
+                    answerEl.className = 'detail-answer answer-yes';
+                } else {
+                    answerEl.textContent = i === 3 ? '有' : '否';
+                    answerEl.className = 'detail-answer answer-no';
+                }
+            }
+            
+            detailModal.style.display = 'flex';
+        }
+        
+        // 导出数据功能
+        function exportData() {
+            const history = getHistory();
+            const historyEntries = Object.entries(history);
+            
+            if (historyEntries.length === 0) {
+                showMessage('暂无数据可导出', 'warning');
+                return;
+            }
+            
+            // 创建数据备份对象
+            const backupData = {
+                appName: '遗精风险自评表',
+                exportDate: new Date().toISOString(),
+                recordCount: historyEntries.length,
+                data: history
+            };
+            
+            // 转换为JSON字符串
+            const jsonString = JSON.stringify(backupData, null, 2);
+            
+            // 创建Blob对象
+            const blob = new Blob([jsonString], { type: 'application/json' });
+            
+            // 创建下载链接
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            const exportDate = new Date().toISOString().split('T')[0];
+            a.href = url;
+            a.download = `遗精风险评估备份_${exportDate}.json`;
+            
+            // 触发下载
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            
+            // 清理URL对象
+            URL.revokeObjectURL(url);
+            
+            showMessage(`成功导出 ${historyEntries.length} 条记录！`, 'success');
+        }
+        
+        // 导入数据功能
+        function importData() {
+            importFileInput.click();
+        }
+        
+        // 处理导入文件
+        function handleImportFile(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                try {
+                    const importedData = JSON.parse(e.target.result);
+                    
+                    // 验证导入的数据格式
+                    if (!importedData.data || typeof importedData.data !== 'object') {
+                        showMessage('导入失败：文件格式不正确', 'error');
+                        return;
+                    }
+                    
+                    // 显示确认对话框
+                    const recordCount = Object.keys(importedData.data).length;
+                    modalMessage.textContent = `发现 ${recordCount} 条记录，是否导入并合并到现有数据中？`;
+                    showModal('import', importedData.data);
+                    
+                } catch (error) {
+                    showMessage('导入失败：文件格式错误或已损坏', 'error');
+                    console.error('导入错误:', error);
+                }
+                
+                // 重置文件输入
+                event.target.value = '';
+            };
+            
+            reader.onerror = function() {
+                showMessage('读取文件失败，请重试', 'error');
+            };
+            
+            reader.readAsText(file);
+        }
+        
+        // 实际执行导入操作
+        function performImport(dataToImport) {
+            const existingData = getHistory();
+            
+            // 合并数据，新数据覆盖旧数据
+            const mergedData = { ...existingData, ...dataToImport };
+            
+            // 保存合并后的数据
+            saveHistory(mergedData);
+            
+            // 更新显示
+            updateMonthlyHistoryDisplay();
+            generateCalendar();
+            loadDateRecord(currentSelectedDate);
+            
+            showMessage(`成功导入 ${Object.keys(dataToImport).length} 条记录！`, 'success');
+        }
+        
+        // 显示消息提示
+        function showMessage(message, type = 'info') {
+            // 移除现有的消息提示
+            const existingMessage = document.querySelector('.message-toast');
+            if (existingMessage) {
+                existingMessage.remove();
+            }
+            
+            // 创建消息元素
+            const messageEl = document.createElement('div');
+            messageEl.className = `message-toast ${type}`;
+            messageEl.textContent = message;
+            messageEl.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 15px 20px;
+                border-radius: 10px;
+                background-color: ${type === 'success' ? '#d4edda' : type === 'error' ? '#f8d7da' : '#fff3cd'};
+                color: ${type === 'success' ? '#155724' : type === 'error' ? '#721c24' : '#856404'};
+                border: 1px solid ${type === 'success' ? '#c3e6cb' : type === 'error' ? '#f5c6cb' : '#ffeaa7'};
+                z-index: 9999;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+                animation: fadeIn 0.3s ease-out;
+                max-width: 300px;
+                font-weight: 500;
+            `;
+            
+            document.body.appendChild(messageEl);
+            
+            // 3秒后自动消失
+            setTimeout(() => {
+                messageEl.style.opacity = '0';
+                messageEl.style.transition = 'opacity 0.5s';
+                setTimeout(() => messageEl.remove(), 500);
+            }, 3000);
+        }
+        
+        // 显示确认对话框
+        function showModal(actionType, data = null) {
+            pendingAction = { type: actionType, data };
+            confirmModal.style.display = 'flex';
+        }
+        
+        // 隐藏确认对话框
+        function hideModal() {
+            confirmModal.style.display = 'none';
+            pendingAction = null;
+        }
+        
+        // 清除历史记录
+        function clearHistory() {
+            modalMessage.textContent = '您确定要清除所有历史记录吗？此操作不可撤销。';
+            showModal('clear');
+        }
+        
+        // 执行清除历史记录
+        function performClearHistory() {
+            localStorage.removeItem('ejRiskAssessmentHistory');
+            updateMonthlyHistoryDisplay();
+            generateCalendar();
+            assessmentForm.reset();
+            resultPanel.style.display = 'none';
+            currentDateEl.classList.remove('day-red');
+            
+            showMessage('历史记录已清除', 'success');
+        }
+        
+        // 初始化页面
+        function initPage() {
+            updateCurrentDate();
+            updateMonthlyHistoryDisplay();
+            generateCalendar();
+            loadDateRecord(currentSelectedDate);
+        }
+        
+        // 事件监听
+        assessmentForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // 检查是否所有问题都已回答
+            let allAnswered = true;
+            for (let i = 1; i <= 5; i++) {
+                if (!document.querySelector(`input[name="q${i}"]:checked`)) {
+                    allAnswered = false;
+                    break;
+                }
+            }
+            
+            if (!allAnswered) {
+                showMessage('请回答所有问题后再提交评估！', 'error');
+                return;
+            }
+            
+            // 计算并显示结果
+            const result = calculateRisk();
+            showResult(result);
+            
+            // 滚动到结果位置
+            resultPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+        
+        clearHistoryBtn.addEventListener('click', clearHistory);
+        exportBtn.addEventListener('click', exportData);
+        importBtn.addEventListener('click', importData);
+        importFileInput.addEventListener('change', handleImportFile);
+        closeDetailBtn.addEventListener('click', function() {
+            detailModal.style.display = 'none';
+        });
+        
+        // 删除选中按钮事件
+        deleteSelectedBtn.addEventListener('click', deleteSelectedRecords);
+        
+        // 日期选择功能
+        datePickerBtn.addEventListener('click', function() {
+            dateInput.showPicker ? dateInput.showPicker() : dateInput.click();
+        });
+        
+        dateInput.addEventListener('change', function() {
+            if (this.value) {
+                currentSelectedDate = new Date(this.value);
+                updateCurrentDate();
+                loadDateRecord(currentSelectedDate);
+                generateCalendar(currentSelectedDate.getMonth(), currentSelectedDate.getFullYear());
+            }
+        });
+        
+        // 今天按钮功能
+        todayBtn.addEventListener('click', function() {
+            currentSelectedDate = new Date();
+            updateCurrentDate();
+            loadDateRecord(currentSelectedDate);
+            calendarCurrentMonth = currentSelectedDate.getMonth();
+            calendarCurrentYear = currentSelectedDate.getFullYear();
+            generateCalendar(calendarCurrentMonth, calendarCurrentYear);
+        });
+        
+        // 日历导航功能
+        prevMonthBtn.addEventListener('click', function() {
+            calendarCurrentMonth--;
+            if (calendarCurrentMonth < 0) {
+                calendarCurrentMonth = 11;
+                calendarCurrentYear--;
+            }
+            generateCalendar(calendarCurrentMonth, calendarCurrentYear);
+        });
+        
+        nextMonthBtn.addEventListener('click', function() {
+            calendarCurrentMonth++;
+            if (calendarCurrentMonth > 11) {
+                calendarCurrentMonth = 0;
+                calendarCurrentYear++;
+            }
+            generateCalendar(calendarCurrentMonth, calendarCurrentYear);
+        });
+        
+        todayMonthBtn.addEventListener('click', function() {
+            const today = new Date();
+            calendarCurrentMonth = today.getMonth();
+            calendarCurrentYear = today.getFullYear();
+            generateCalendar(calendarCurrentMonth, calendarCurrentYear);
+        });
+        
+        // 确认对话框事件
+        confirmOkBtn.addEventListener('click', function() {
+            if (pendingAction) {
+                switch (pendingAction.type) {
+                    case 'clear':
+                        performClearHistory();
+                        break;
+                    case 'import':
+                        performImport(pendingAction.data);
+                        break;
+                    case 'deleteSelected':
+                        performDeleteSelected();
+                        break;
+                    case 'deleteSingle':
+                        performDeleteSingle(pendingAction.data);
+                        break;
+                }
+            }
+            hideModal();
+        });
+        
+        confirmCancelBtn.addEventListener('click', hideModal);
+        
+        // 点击模态框背景关闭
+        confirmModal.addEventListener('click', function(e) {
+            if (e.target === confirmModal) {
+                hideModal();
+            }
+        });
+        
+        detailModal.addEventListener('click', function(e) {
+            if (e.target === detailModal) {
+                detailModal.style.display = 'none';
+            }
+        });
+        
+        // 点击页面其他地方退出选择模式
+        document.addEventListener('click', function(e) {
+            if (isSelectionMode && !e.target.closest('.history-item') && !e.target.closest('.selection-controls')) {
+                exitSelectionMode();
+            }
+        });
+        
+        // 页面加载时初始化
+        document.addEventListener('DOMContentLoaded', initPage);
+        
+        // 添加简单的每日提醒功能
+        function checkDailyReminder() {
+            const lastReminder = localStorage.getItem('ejLastReminderDate');
+            const todayStr = formatDate(new Date());
+            
+            if (lastReminder !== todayStr) {
+                // 每天只提醒一次
+                setTimeout(() => {
+                    showMessage('温馨提示：别忘了睡前完成遗精风险自评，提前预防！', 'info');
+                    localStorage.setItem('ejLastReminderDate', todayStr);
+                }, 2000);
+            }
+        }
+        
+        // 页面加载后2秒检查提醒
+        setTimeout(checkDailyReminder, 2000);
+        
+        // 在现有的所有JavaScript代码的最后面添加：
+
+// 注册Service Worker
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./service-worker.js')
+      .then(registration => {
+        console.log('ServiceWorker 注册成功: ', registration.scope);
+        
+        // 检查是否有更新
+        registration.addEventListener('updatefound', () => {
+          const newWorker = registration.installing;
+          console.log('发现Service Worker更新');
+          
+          newWorker.addEventListener('statechange', () => {
+            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+              // 新版本已安装，提示用户刷新
+              if (confirm('应用有新版本，是否立即更新？')) {
+                window.location.reload();
+              }
+            }
+          });
+        });
+      })
+      .catch(error => {
+        console.log('ServiceWorker 注册失败: ', error);
+      });
+  });
+}
+
+// 检测是否在独立模式运行
+if (window.matchMedia('(display-mode: standalone)').matches) {
+  console.log('运行在独立模式');
+} else if (window.navigator.standalone === true) {
+  console.log('iOS独立模式');
+}
+
+// 添加到主屏幕提示（仅显示一次）
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+  // 防止自动弹出
+  e.preventDefault();
+  // 保存事件以便稍后触发
+  deferredPrompt = e;
+  
+  // 显示自定义的安装提示
+  setTimeout(() => {
+    if (!localStorage.getItem('installPromptShown')) {
+      if (confirm('是否将此应用添加到主屏幕以便快速访问？')) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            console.log('用户同意安装');
+            localStorage.setItem('appInstalled', 'true');
+          } else {
+            console.log('用户拒绝安装');
+          }
+          deferredPrompt = null;
+        });
+      }
+      localStorage.setItem('installPromptShown', 'true');
+    }
+  }, 3000); // 3秒后显示提示
+});
+    </script>
+</body>
+</html>
